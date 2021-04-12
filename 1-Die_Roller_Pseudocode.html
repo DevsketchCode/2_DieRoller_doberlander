@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Die Roller Pseudocode</title>
+    <style>
+    
+    body, p,h1,h2{font-family: Arial, Helvetica, sans-serif;}
+    .container{
+      border: 1px solid #ddd;
+      -webkit-box-shadow : 5px 5px 5px #ddd;
+         -moz-box-shadow : 5px 5px 5px #ddd;
+              box-shadow : 5px 5px 5px #ddd;
+      margin             : 0px auto;
+      padding            : 10px;
+      width              : 940px; 
+    }
+
+    h1{margin:0px;}
+
+    header{
+      margin: -10px -10px 0px -10px;		
+    }
+
+    header, footer{
+      background-color : #666;
+      display          : block;
+      color            : #FFF;
+      padding          : 10px;
+    }
+
+    header h2 a{
+      text-decoration : none;
+      color           : #fff;
+      }
+
+    footer{
+      margin: 0px -10px -10px -10px;	
+
+    }
+
+    .output{
+      background-color: #ccc;
+      display         : block;
+      padding         : 20px;
+      overflow        : auto
+    }
+
+    code.varname, code.keyword{color: #090};
+
+    p.lab_link{
+      background-color: #ddd;	
+      border          : 1px solid #999;
+      padding         : 4px;
+    }
+
+    table{
+      border       : 1px solid #999;	
+      margin-bottom: 10px;
+    }
+
+    table th{
+      background-color: #CCC;
+    }
+
+    .pseudocode {
+      background : #151515;
+      border     : 1px solid #ccc;
+      color      : #22FF22;
+      font-family: "Courier New", sans-serif;
+      font-size  : 1.0em;
+      overflow   : auto;
+      padding    : 10px;
+    }
+
+    .notice{
+      background-color: #FF9;
+      border          : 1px solid #F00;
+      font-weight     : bolder;
+      padding         : 4px;
+    }
+    </style>
+
+  </head>
+
+  <body>
+    <section class="container">
+      <header>
+        <h1>Web 2 - JavaScript</h1>
+      </header>
+
+      <section id="main">
+
+        <h1>Die Roller Pseudocode</h1>
+        
+        <h2>Name: David Oberlander</h2>
+
+        <h3>Problem Statement</h3>
+
+        <blockquote><p><strong>
+          Write a program that will simulate the roll of an input number of dice. The solution should 
+          interact naratively with the user by first name, and randomly generated a number to simulate
+          the roll of each single die requested. The output should show the random result for each 
+          separate die and then calculate the sum of the requested number of dice. Random numbers 
+          generated for each die must result in single digit integers between 1 and 6 inclusive. 
+        </strong></p></blockquote>
+
+        <h3>1. Nouns and Verbs</h3>
+
+        <p>Identify the nouns and verbs in the problem statement.</p>
+
+<pre class="pseudocode">PROBLEM STATEMENT:
+Write a program that will simulate the roll of an input number of dice. The solution should 
+interact naratively with the user by first name, and randomly generated a number to simulate
+the roll of each single die requested. The output should show the random result for each 
+separate die and then calculate the sum of the requested number of dice. Random numbers 
+generated for each die must result in single digit integers between 1 and 6 inclusive. 
+
+Nouns: number of dice, first name, random generated number, sum, output, integers between 1 and 6
+
+Verbs: roll, input, generate, request, show, calculate
+</pre>
+
+        <h3>2. Defining Diagram</h3>
+
+        <p>Convert the nouns and verbs into variable names and processes and create a defining diagram.</p>
+
+<pre class="pseudocode">
+INPUTS:
+  numberOfDice
+  firstName
+
+PROCESSING:
+  prompt user for numberOfDice
+  convert numberOfDice to a number
+  prompt user for firstName
+  calculate randomly generated number between 1 and 6 inclusive for each numberOfDice
+  display each generated number
+  calculate the sum of the generated numbers
+  display the calculated sum
+
+OUTPUTS:
+  generatedNumber for each die
+  calculatedTotal
+
+</pre>
+
+        <h3>3. Solution Algorithm</h3>
+        
+        <p>Enter the Solution Algorithm below.
+
+<pre class="pseudocode">
+
+RollDice
+  Initialize strFirstName to ""
+  Initialize strDieWord = "dice"
+  Initialize strOutputString to ""
+  Initialize intNumberDie to 0
+  Initialize intGeneratedNumber to 0
+  Initialize intSumOfDice to 0
+  
+  DO
+    Prompt for strFirstName with "Please enter your first name:"
+  WHILE strFirstName is not empty
+
+  DO
+    Prompt for intNumberDie with "Please enter the number of dice you want to use."
+    Convert intNumberDie to a number
+    IF intNumberDie is Not a Number OR intNumberDie is less than 0 OR (parseFloat(intNumberDie) does not equal parseInt(intNumberDie)) THEN
+      Alert with "Please enter a positive number."
+    ELSE IF intNumberDie is greater than 10 THEN
+      Alert with "Sorry we only have 10 dice."
+    ELSE IF intNumberDie is 1 THEN
+      strDieWord = "die"
+    END IF
+  WHILE intNumberDie is Not a Number OR intNumberDie is less than 0 OR (parseFloat(intNumberDie) does not equal parseInt(intNumberDie)) OR intNumberDie is greater than 10
+
+  Set strOutputString to "<p>Rolling " + intNumberDie + " " + strDieWord + "...</p>"
+
+  IF intNumberDie is greater than zero THEN
+
+    Set strOutputString to strOutputString + "<p>Hey " + strFirstName + ", you rolled a "
+
+    LOOP starting at 1 up to (and including) intNumberDie in increments of 1
+      Set intGeneratedNumber to Random number between 1 and 6
+      Alert with "Die #" + increment + " is a " + intGeneratedNumber
+
+      IF increment is not equal to intNumberDie OR intNumberDie is equal to 1 THEN
+        IF intNumberDie is less than or equal to 2 THEN
+          Set strOutputString to strOutputString + intGeneratedNumber + " "
+        ELSE  
+          Set strOutputString to strOutputString + intGeneratedNumber + ", "
+        END IF
+      ELSE 
+        Set strOutputString to strOutputString + "and " + intGeneratedNumber
+      END IF
+
+      Set intSumOfDice to intSumOfDice + intGeneratedNumber
+    ENDLOOP
+
+    Set strOutputString to strOutputString + " for a grand total of " + intSumOfDice + ".</p> <h2>Hope you had fun rolling the dice!</h2>"
+
+  ELSE
+      Set strOutputString to strOutputString + "<p>Hey " + strFirstName + ", you forgot the dice again. " + "Your grand total is " + intSumOfDice + "."
+  END IF
+
+  Display strOutputString to the "content" element's innerHTML
+
+END
+
+</pre>
+
+        <h3>4. Checking the Solution Algorithm</h3>
+        <p>
+          Here are a couple test plans.
+        </p>
+
+
+<pre class="pseudocode">
+VARIABLES: strFirstName, intNumberDie
+
+TEST CASE 1:
+
+  INPUT VALUES: Jordan, 3
+
+  EXPECTED RESULT:
+    Rolling 3 dice...
+    Hey Jordan, you rolled a 1, 5, and 5 for a grand total of 11. 
+    Hope you had fun rolling the dice!
+    (NOTE: numbers are random numbers between 1 and 6)
+
+  ACTUAL RESULT:
+    Rolling 3 dice...
+    Hey Jordan, you rolled a 3, 5, and 3 for a grand total of 11.
+    Hope you had fun rolling the dice!
+
+TEST CASE 2:
+
+  INPUT VALUES: Sondra, 1
+
+  EXPECTED RESULT:
+    Rolling 1 die...
+    Hey Sondra, you rolled a 3 for a grand total of 3. 
+    Hope you had fun rolling the dice!
+    (NOTE: numbers are random numbers between 1 and 6)
+
+  ACTUAL RESULT:
+    Rolling 1 die...
+    Hey Sondra, you rolled a 3 for a grand total of 3.
+    Hope you had fun rolling the dice!
+
+TEST CASE 3:
+
+  INPUT VALUES: Michael Scott, 0
+
+  EXPECTED RESULT:
+    Rolling 0 die...
+    Hey Michael Scott, you forgot the dice again. Your grand total is 0. 
+
+  ACTUAL RESULT:
+    Rolling 0 dice...
+    Hey Michael Scott, you forgot the dice again. Your grand total is 0.
+  
+</pre>
+
+      </section>
+
+      <footer>
+        <p>
+          Latest Version: 1.1809
+        </p>
+      </footer>
+
+   </section>
+ </body>
+</html>
